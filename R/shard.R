@@ -215,6 +215,13 @@ select_.party_df <- function(.data, ..., .dots = list()) {
   shard_call(.data, quote(dplyr::select), ..., .dots = .dots)
 }
 
+#' @importFrom dplyr arrange_
+#' @method arrange_ party_df
+#' @export
+arrange_.party_df <- function(.data, ..., .dots = list()) {
+  shard_call(.data, quote(dplyr::arrange), ..., .dots = .dots)
+}
+
 #' @importFrom dplyr group_by_
 #' @method group_by_ party_df
 #' @export
