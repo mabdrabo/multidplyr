@@ -15,6 +15,10 @@
 #' s %>% summarise(n())
 #' s %>% select(-cyl)
 #'
+#' partition(mtcars, cyl) %>%
+#' arrange(mpg, .by_group = T) %>%
+#' distinct(mpg) %>% collect()
+#'
 #' if (require("nycflights13")) {
 #' planes <- partition(flights, tailnum)
 #' summarise(planes, n())
@@ -220,6 +224,13 @@ select_.party_df <- function(.data, ..., .dots = list()) {
 #' @export
 arrange_.party_df <- function(.data, ..., .dots = list()) {
   shard_call(.data, quote(dplyr::arrange), ..., .dots = .dots)
+}
+
+#' @importFrom dplyr distinct_
+#' @method distinct_ party_df
+#' @export
+distinct_.party_df <- function(.data, ..., .dots = list()) {
+  shard_call(.data, quote(dplyr::distinct), ..., .dots = .dots)
 }
 
 #' @importFrom dplyr group_by_
