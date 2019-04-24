@@ -31,6 +31,10 @@ s \%>\% filter(vs == 1)
 s \%>\% summarise(n())
 s \%>\% select(-cyl)
 
+partition(mtcars, cyl) \%>\%
+arrange(mpg, .by_group = T) \%>\%
+distinct(mpg) \%>\% collect()
+
 if (require("nycflights13")) {
 planes <- partition(flights, tailnum)
 summarise(planes, n())
