@@ -233,6 +233,13 @@ distinct_.party_df <- function(.data, ..., .dots = list()) {
   shard_call(.data, quote(dplyr::distinct), ..., .dots = .dots)
 }
 
+#' @importFrom dplyr left_join
+#' @method left_join party_df
+#' @export
+left_join.party_df <- function(.data, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
+  shard_call(.data, quote(dplyr::left_join), y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
+}
+
 #' @importFrom dplyr group_by_
 #' @method group_by_ party_df
 #' @export
